@@ -1,3 +1,4 @@
 *.log
 .env
 pgdata
+mage_data/
