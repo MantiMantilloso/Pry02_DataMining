@@ -1,0 +1,42 @@
+services:
+  # Servicio de Base de Datos (PostgreSQL)
+  postgres:
+    image: postgres:14
+    container_name: postgres_db
+    restart: on-failure
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  # Servicio de Orquestación (Mage AI)
+  mage:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mage_app
+    restart: on-failure
+    environment:
+      USER_CODE_PATH: /home/src/${PROJECT_NAME} 
+    ports:
+      - "6789:6789"
+    volumes:
+      - .:/home/src/
+    command: mage start ${PROJECT_NAME}
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
+
+networks:
+  app-network:
+    driver: bridge

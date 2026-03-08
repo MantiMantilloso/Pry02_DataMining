@@ -1,0 +1,7 @@
+dbt-postgres
+pandas
+sqlalchemy
+psycopg2-binary
+requests
+pyarrow
+fastparquet
