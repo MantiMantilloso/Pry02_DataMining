@@ -1,48 +1,57 @@
 blocks:
 - all_upstream_blocks_executed: true
-  color: yellow
+  color: blue
   configuration: {}
   downstream_blocks:
-  - green_taxi_loader
+  - run_gold
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: yellow_taxi_loader
-  retry_config: null
-  status: updated
-  timeout: null
-  type: custom
-  upstream_blocks: []
-  uuid: yellow_taxi_loader
-- all_upstream_blocks_executed: false
-  color: teal
-  configuration: {}
-  downstream_blocks: []
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: python
-  name: green_taxi_loader
+  name: create_gold_tables
   retry_config: null
   status: executed
   timeout: null
   type: custom
+  upstream_blocks: []
+  uuid: create_gold_tables
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    dbt:
+      command: run
+    dbt_profile_target: null
+    dbt_project_name: dbt/nyc_taxi
+    disable_query_preprocessing: false
+    export_write_policy: append
+    file_source:
+      path: dbts/run_gold.yaml
+    use_raw_sql: false
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: yaml
+  name: run_gold
+  retry_config: null
+  status: failed
+  timeout: null
+  type: dbt
   upstream_blocks:
-  - yellow_taxi_loader
-  uuid: green_taxi_loader
+  - create_gold_tables
+  uuid: run_gold
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
 conditionals: []
-created_at: '2026-03-06 18:11:47.909688+00:00'
+created_at: '2026-03-08 22:49:54.002282+00:00'
 data_integration: null
-description: extracion secuencial completa de los viajes de taxis
+description: null
 executor_config: {}
 executor_count: 1
 executor_type: null
 extensions: {}
-name: extract_taxi_trips
+name: dbt_build_gold
 notification_config: {}
 remote_variables_dir: null
 retry_config: {}
@@ -51,8 +60,8 @@ settings:
   triggers: null
 spark_config: {}
 tags:
-- bronze
+- gold
 type: python
-uuid: extract_taxi_trips
+uuid: dbt_build_gold
 variables_dir: /home/src/mage_data/ny_taxi_pipeline
 widgets: []

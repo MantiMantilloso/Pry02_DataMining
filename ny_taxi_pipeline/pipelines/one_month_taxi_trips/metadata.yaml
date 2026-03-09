@@ -1,48 +1,52 @@
 blocks:
 - all_upstream_blocks_executed: true
-  color: yellow
-  configuration: {}
+  color: null
+  configuration:
+    file_source:
+      path: data_loaders/extract_taxi_trips.py
   downstream_blocks:
-  - green_taxi_loader
+  - export_taxi_trips
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: yellow_taxi_loader
+  name: extract_taxi_trips
   retry_config: null
-  status: updated
+  status: not_executed
   timeout: null
-  type: custom
+  type: data_loader
   upstream_blocks: []
-  uuid: yellow_taxi_loader
+  uuid: extract_taxi_trips
 - all_upstream_blocks_executed: false
-  color: teal
-  configuration: {}
+  color: null
+  configuration:
+    file_source:
+      path: data_exporters/export_taxi_trips.py
   downstream_blocks: []
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: green_taxi_loader
+  name: export_taxi_trips
   retry_config: null
-  status: executed
+  status: not_executed
   timeout: null
-  type: custom
+  type: data_exporter
   upstream_blocks:
-  - yellow_taxi_loader
-  uuid: green_taxi_loader
+  - extract_taxi_trips
+  uuid: export_taxi_trips
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
 conditionals: []
-created_at: '2026-03-06 18:11:47.909688+00:00'
+created_at: '2026-03-09 02:46:09.875013+00:00'
 data_integration: null
-description: extracion secuencial completa de los viajes de taxis
+description: ejecuta para un mes, usar para demostracion rapida
 executor_config: {}
 executor_count: 1
 executor_type: null
 extensions: {}
-name: extract_taxi_trips
+name: one_month_taxi_trips
 notification_config: {}
 remote_variables_dir: null
 retry_config: {}
@@ -53,6 +57,10 @@ spark_config: {}
 tags:
 - bronze
 type: python
-uuid: extract_taxi_trips
+uuid: one_month_taxi_trips
+variables:
+  month: '01'
+  service_type: yellow
+  year: 2022
 variables_dir: /home/src/mage_data/ny_taxi_pipeline
 widgets: []

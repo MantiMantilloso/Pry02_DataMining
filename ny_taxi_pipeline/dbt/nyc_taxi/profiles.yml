@@ -1,0 +1,11 @@
+nyc_taxi:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: postgres
+      user: "{{ mage_secret_var('POSTGRES_USER') }}"
+      password: "{{ mage_secret_var('POSTGRES_PASSWORD') }}"
+      dbname: "{{ mage_secret_var('POSTGRES_DBNAME') }}"
+      port: 5432
+      schema: public

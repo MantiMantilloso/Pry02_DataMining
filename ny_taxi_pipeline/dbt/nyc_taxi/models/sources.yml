@@ -1,0 +1,6 @@
+sources:
+  - name: bronze
+    schema: bronze
+    tables:
+      - name: trips
+      - name: taxi_zone_lookup

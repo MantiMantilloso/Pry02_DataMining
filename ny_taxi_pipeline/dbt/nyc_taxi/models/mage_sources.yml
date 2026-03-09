@@ -1,0 +1,14 @@
+sources:
+- description: Dataframes Mage upstream blocks
+  loader: mage
+  name: mage_nyc_taxi
+  schema: public
+  tables:
+  - description: Dataframe for block `create_gold_tables` of the `dbt_build_gold`
+      mage pipeline.
+    identifier: mage_dbt_build_gold_create_gold_tables
+    meta:
+      block_uuid: create_gold_tables
+      pipeline_uuid: dbt_build_gold
+    name: dbt_build_gold_create_gold_tables
+version: 2

@@ -1,0 +1,10 @@
+profile: nyc_taxi
+name: nyc_taxi
+model-paths: ["models"]      # ← add this line
+test-paths: ["tests"]
+models:
+  nyc_taxi:
+    silver:
+      +materialized: view
+    gold:
+      +materialized: table

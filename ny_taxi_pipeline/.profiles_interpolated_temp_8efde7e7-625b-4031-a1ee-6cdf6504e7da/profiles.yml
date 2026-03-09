@@ -1,0 +1,11 @@
+nyc_taxi:
+  outputs:
+    dev:
+      dbname: ny_taxi_db
+      host: postgres
+      password: adminpass123
+      port: 5432
+      schema: public
+      type: postgres
+      user: root
+  target: dev

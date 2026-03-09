@@ -1,0 +1,42 @@
+models:
+  - name: silver_trips
+    columns:
+      - name: pickup_ts
+        data_tests:
+          - not_null
+
+      - name: dropoff_ts
+        data_tests:
+          - not_null
+
+      - name: trip_distance
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+
+      - name: total_amount
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+
+      - name: pulocationid
+        data_tests:
+          - not_null
+          - relationships:
+              to: source('bronze', 'taxi_zone_lookup')
+              field: locationid
+
+      - name: dolocationid
+        data_tests:
+          - not_null
+          - relationships:
+              to: source('bronze', 'taxi_zone_lookup')
+              field: locationid
+
+      - name: service_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['yellow', 'green']
